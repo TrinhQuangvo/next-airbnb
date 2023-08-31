@@ -4,11 +4,20 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import Avatar from './Avatar'
 import MenuItem from './MenuItem'
 import useRegisterModal from '@/hooks/useRegisterModal'
-type Props = {}
+import useLoginModal from '@/hooks/useLoginModal'
+import { signOut } from 'next-auth/react'
+import { User } from '@prisma/client'
 
-const UserMenu = (props: Props) => {
+type Props = {
+    currentUser?: User | null
+}
+
+const UserMenu: React.FC<Props> = (props: Props) => {
+    const { currentUser } = props
+
     const [isOpen, setIsOpen] = useState(false)
     const registerModal = useRegisterModal()
+    const loginModal = useLoginModal()
 
     const toggleOpen = useCallback(() => {
         setIsOpen(prev => !prev)
@@ -30,12 +39,24 @@ const UserMenu = (props: Props) => {
             {isOpen && (
                 <div className='absolute rounded-xl shadow-md w-[40vm] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm'>
                     <div className="flex flex-col cursor-pointer">
-                        <MenuItem label='Sign in' onClick={registerModal.onOpen} />
-                        <MenuItem label='Sign up' onClick={registerModal.onOpen} />
+                        {currentUser ? <>
+                            <MenuItem label='My trips' onClick={loginModal.onOpen} />
+                            <MenuItem label='Favorites' onClick={registerModal.onOpen} />
+                            <MenuItem label='Properties' onClick={registerModal.onOpen} />
+                            <MenuItem label='My Home' onClick={registerModal.onOpen} />
+                            <MenuItem label='Log Out' onClick={() => signOut()} />
+                        </>
+                            : <>
+                                <MenuItem label='Login' onClick={loginModal.onOpen} />
+                                <MenuItem label='Register' onClick={registerModal.onOpen} />
+                            </>
+                        }
+
                     </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     )
 }
 
