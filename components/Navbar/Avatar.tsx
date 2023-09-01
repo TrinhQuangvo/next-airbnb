@@ -1,11 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 import React from 'react'
 
-type Props = {}
+type Props = {
+    src?: string
+}
 
 const Avatar = (props: Props) => {
-    return ( 
-        <Image alt='avatar' className='rounded-full' height={30} width={30} src='/images/placeholder.jpg' />
+    const { src } = props
+    return (
+        <Image alt='avatar' className='rounded-full' height={30} width={30} src={`${src ? src : '/images/placeholder.jpg'}`} />
     )
 }
 
