@@ -40,8 +40,7 @@ const LoginModal: React.FC<Props> = (props: Props) => {
         signIn('credentials', {
             ...data,
             redirect: false
-        }).then(callback => {
-            console.log(callback)
+        }).then(callback => { 
             setIsLoading(false)
             if (callback?.ok) {
                 toast.success('Loged In')

@@ -10,6 +10,7 @@ import Heading from './Heading'
 import Input from './Input'
 import { toast } from 'react-hot-toast/headless'
 import Button from '../Button'
+import { signIn } from 'next-auth/react'
 type Props = {}
 
 const RegisterModal: React.FC<Props> = (props: Props) => {
@@ -52,7 +53,7 @@ const RegisterModal: React.FC<Props> = (props: Props) => {
         <div className="flex flex-col gap-4 mt-3">
             <hr />
             <Button outline label='Continue With Google' icon={FcGoogle} onClick={() => { }} />
-            <Button outline label='Continue With Github' icon={AiFillGithub} onClick={() => { }} />
+            <Button outline label='Continue With Github' icon={AiFillGithub} onClick={() => signIn('github')} />
 
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
