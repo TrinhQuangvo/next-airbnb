@@ -47,7 +47,7 @@ const LoginModal: React.FC<Props> = (props: Props) => {
                 </div>
             </div>
         </div>
-    ) G
+    ) 
 
     const toggle = useCallback(() => {
         loginModal.onClose()
