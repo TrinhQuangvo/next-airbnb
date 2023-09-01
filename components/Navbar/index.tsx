@@ -4,15 +4,15 @@ import Container from '../Container'
 import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
-import { User } from '@prisma/client'
+import { SafeUser } from '@/app/types/SafeUser'
+import Categories from './Categories'
 
 type Props = {
-    currentUser?: User | null
+    currentUser?: SafeUser | null
 }
 
 const Navbar: React.FC<Props> = (props: Props) => {
     const { currentUser } = props
-    console.log(currentUser)
     return (
         <nav className='fixed w-full bg-white z-10 shadow-sm'>
             <Container>
@@ -22,7 +22,7 @@ const Navbar: React.FC<Props> = (props: Props) => {
                     <UserMenu currentUser={currentUser} />
                 </div>
             </Container>
-
+            <Categories />
         </nav>
     )
 }

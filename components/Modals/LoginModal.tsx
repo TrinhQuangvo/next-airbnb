@@ -9,12 +9,14 @@ import Heading from './Heading'
 import Input from './Input'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import useRegisterModal from '@/hooks/useRegisterModal'
 
 type Props = {}
 
 const LoginModal: React.FC<Props> = (props: Props) => {
     const router = useRouter()
     const loginModal = useLoginModal()
+    const registerModal = useRegisterModal()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -33,6 +35,25 @@ const LoginModal: React.FC<Props> = (props: Props) => {
         </div>
     )
 
+    const renderFooter = () => (
+        <div className="flex flex-col gap-4 mt-3">
+            <hr />
+            {/* <Button outline label='Continue With Github' icon={AiFillGithub} onClick={() => signIn('github')} /> */}
+
+            <div className="text-neutral-500 text-center mt-4 font-light">
+                <div className="flex flex-row items-center justify-center gap-2">
+                    <p>Haven't an Account ? </p>
+                    <div onClick={toggle} className='text-neutral-500 hover:underline cursor-pointer'>Create New Account</div>
+                </div>
+            </div>
+        </div>
+    ) G
+
+    const toggle = useCallback(() => {
+        loginModal.onClose()
+        registerModal.onOpen()
+    }, [])
+
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true)
@@ -40,7 +61,7 @@ const LoginModal: React.FC<Props> = (props: Props) => {
         signIn('credentials', {
             ...data,
             redirect: false
-        }).then(callback => { 
+        }).then(callback => {
             setIsLoading(false)
             if (callback?.ok) {
                 toast.success('Loged In')
@@ -55,6 +76,7 @@ const LoginModal: React.FC<Props> = (props: Props) => {
     }
     return (
         <Modal
+            footer={renderFooter()}
             body={renderBody()}
             title='Login'
             isOpen={loginModal.isOpen}
