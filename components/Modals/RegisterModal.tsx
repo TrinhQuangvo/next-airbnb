@@ -11,10 +11,12 @@ import Input from './Input'
 import { toast } from 'react-hot-toast/headless'
 import Button from '../Button'
 import { signIn } from 'next-auth/react'
+import useLoginModal from '@/hooks/useLoginModal'
 type Props = {}
 
 const RegisterModal: React.FC<Props> = (props: Props) => {
     const registerModal = useRegisterModal()
+    const loginModal = useLoginModal()
     const [isLoading, setIsLoading] = useState(false)
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
@@ -40,6 +42,11 @@ const RegisterModal: React.FC<Props> = (props: Props) => {
             })
     }
 
+    const toggle = useCallback(() => {
+        registerModal.onClose()
+        loginModal.onOpen()
+    }, [])
+
     const renderBody = () => (
         <div className='flex flex-col gap-4'>
             <Heading title='Welcome to Airbnb' subtitle='Create an account!' center />
@@ -58,7 +65,7 @@ const RegisterModal: React.FC<Props> = (props: Props) => {
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
                     <p>Already get an Account ? </p>
-                    <div onClick={() => registerModal.onClose()} className='text-neutral-500 hover:underline cursor-pointer'>Login</div>
+                    <div onClick={toggle} className='text-neutral-500 hover:underline cursor-pointer'>Login</div>
                 </div>
             </div>
         </div>

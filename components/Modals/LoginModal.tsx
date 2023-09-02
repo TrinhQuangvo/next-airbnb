@@ -10,6 +10,8 @@ import Input from './Input'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import useRegisterModal from '@/hooks/useRegisterModal'
+import { AiFillGithub } from 'react-icons/ai'
+import Button from '../Button'
 
 type Props = {}
 
@@ -38,12 +40,12 @@ const LoginModal: React.FC<Props> = (props: Props) => {
     const renderFooter = () => (
         <div className="flex flex-col gap-4 mt-3">
             <hr />
-            {/* <Button outline label='Continue With Github' icon={AiFillGithub} onClick={() => signIn('github')} /> */}
+            <Button outline label='Continue With Github' icon={AiFillGithub} onClick={() => signIn('github')} />
 
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
                     <p>Haven't an Account ? </p>
-                    <div onClick={toggle} className='text-neutral-500 hover:underline cursor-pointer'>Create New Account</div>
+                    <div onClick={toggle} className='transition duration-1000 text-neutral-500 hover:underline  cursor-pointer hover:font-semibold'>Create New Account</div>
                 </div>
             </div>
         </div>
