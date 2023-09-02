@@ -18,6 +18,16 @@ export const LINKS = [
     { label: 'Home', url: '/' },
     { label: 'Post', url: '/posts' },
 ]
+
+
+export type CountrySelectValue = {
+    flag: string
+    label: string
+    latgn: string
+    region: string
+    value: string
+}
+
 export const categories = [
     {
         label: 'Beach',

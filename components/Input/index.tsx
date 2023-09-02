@@ -15,7 +15,7 @@ type Props = {
 }
 
 const Input: React.FC<Props> = (props: Props) => {
-    const { id, label, type, disabled, formatPrice, register, errors, required } = props
+    const { id, label, type = 'text', disabled, formatPrice, register, errors, required } = props
 
     return (
         <div className='w-full relative'>

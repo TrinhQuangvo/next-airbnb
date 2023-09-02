@@ -6,7 +6,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import Modal from '.'
 import { toast } from 'react-hot-toast'
 import Heading from './Heading'
-import Input from './Input'
+import Input from '../Input'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import useRegisterModal from '@/hooks/useRegisterModal'
@@ -49,7 +49,7 @@ const LoginModal: React.FC<Props> = (props: Props) => {
                 </div>
             </div>
         </div>
-    ) 
+    )
 
     const toggle = useCallback(() => {
         loginModal.onClose()
@@ -65,10 +65,12 @@ const LoginModal: React.FC<Props> = (props: Props) => {
             redirect: false
         }).then(callback => {
             setIsLoading(false)
+            toast.success('Handling Data from server')
+
             if (callback?.ok) {
                 toast.success('Loged In')
-                router.refresh()
                 loginModal.onClose()
+                router.refresh()
             }
 
             if (callback?.error)

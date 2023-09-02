@@ -4,7 +4,7 @@ import Container from '../Container'
 import Logo from './Logo'
 import Search from './Search'
 import UserMenu from './UserMenu'
-import { SafeUser } from '@/app/types/SafeUser'
+import { SafeUser } from '@/app/types/SafeUser' 
 import Categories from './Categories'
 
 type Props = {
